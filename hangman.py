@@ -9,21 +9,21 @@ hangman
 #     i.e. even if a player gets 5 wrong guesses, they can still win if they guess the word fi have less than 5 wrong guesses
 # When either the number of wrong guesses reaches 5 or if the player completes the word, the game is over
 
-#Pseudocode
-Ask for mode (2 player mode)
-Define which player provides the word (player 1) and which player guesses the word (player 2)
-Ask player 1 to type in word
-Draw the Hangman board with the number of spaces for each letter
-Start game:
-    1) Ask Player 2 to choose whether to guess a word or letter
-    2) Ask Player 2 to type the word or letter
-    3) Ask PLayer 1 if word or letter is correct
-        a) If correct word, game is over and Player 2 wins
-        b) If correct letter, Player 1 gives coordinates of which space(s) the letter goes
-        c) If word or letter is worng, add it to list of wrong words or letters and add a limb to the "hangman"
-    4) Print the board with the spot with word or print the board adding the wrong words or letters to the list
-    4)Do these steps again and again until:
-If player 2 guesses all of the letters or the word correctly; player 2 wins
-If the player guesses more than 5 letters or words incorrectly; player 1 wins
+# #Pseudocode
+# Ask for mode (2 player mode)
+# Define which player provides the word (player 1) and which player guesses the word (player 2)
+# Ask player 1 to type in word
+# Draw the Hangman board with the number of spaces for each letter
+# Start game:
+#     1) Ask Player 2 to choose whether to guess a word or letter
+#     2) Ask Player 2 to type the word or letter
+#     3) Ask PLayer 1 if word or letter is correct
+#         a) If correct word, game is over and Player 2 wins
+#         b) If correct letter, Player 1 gives coordinates of which space(s) the letter goes
+#         c) If word or letter is worng, add it to list of wrong words or letters and add a limb to the "hangman"
+#     4) Print the board with the spot with word or print the board adding the wrong words or letters to the list
+#     4)Do these steps again and again until:
+# If player 2 guesses all of the letters or the word correctly; player 2 wins
+# If the player guesses more than 5 letters or words incorrectly; player 1 wins
 
     
