@@ -2,6 +2,7 @@
 # def random_word_generator(word_from_computer):
 #     """ this is where the computer will generate a random word to test the player"""
 #     #add code-ask Becca
+import os
 from random_words import RandomWords
 
 # chosen_word = None
@@ -142,38 +143,47 @@ def check_if_guessed_letter_is_wrong_or_right(user_guess_letter, chosen_word, us
             user_guessed_word[index] = user_guess_letter
             user_guessed_word = "".join(user_guessed_word)
    
-    print user_guessed_word
-    print misses
-    if len(misses) == 0:
-        print hangman_figures[0]
-    else:
-        print hangman_figures[len(misses)]
+    # print user_guessed_word
+    # print misses
+    # if len(misses) == 0:
+    #     print hangman_figures[0]
+    # else:
+    #     print hangman_figures[len(misses)]
+    hangman_display(user_guessed_word, misses)
     return user_guessed_word, misses, chosen_word
 
 def check_if_guessed_word_is_wrong_or_right(word_guess, user_guessed_word, misses, chosen_word):
     """ this function is used to see if the word the user picked is the correct word """
     if word_guess == chosen_word:
-        user_guessed_word == word_guess
+        user_guessed_word = word_guess
     else:
         if word_guess != len(chosen_word):
             print "Sorry but {} does not have the same number of characters as the spaces above. Try again.".format(word_guess)
         misses.append(word_guess)
-    print "Sorry, {} was not the correct word.".format(word_guess)
+        print "Sorry, {} was not the correct word.".format(word_guess)
+    # print user_guessed_word
+    # print misses
+    # if len(misses) == 0:
+    #     print hangman_figures[0]
+    # else:
+    #     print hangman_figures[len(misses)]
+    hangman_display(user_guessed_word, misses)
+    return user_guessed_word, misses, chosen_word
+
+def hangman_display(user_guessed_word, misses):
     print user_guessed_word
     print misses
     if len(misses) == 0:
         print hangman_figures[0]
     else:
         print hangman_figures[len(misses)]
-    return user_guessed_word, misses, chosen_word
-
 
 def player_options_continuing_game(user_guessed_word, misses, chosen_word):
     """ this function  asks the player for a letter and also gives the
     option of exiting """
-    guess_letter_or_word = None
-    while guess_letter_or_word != "c":
-        guess_letter_or_word = raw_input("\nWould you like to guess a \nletter(a) \n a word(b) \nor exit the game(c)? \nUse a, b, or c \n>>> ")
+    while True:
+        guess_letter_or_word = raw_input("Would you like to guess" +
+        "\n(a) a letter \n(b) a word or\n(c) exit the game?\nUse a, b, or c\n>>> ")
         if guess_letter_or_word == "a":
             letter_guess = raw_input("What is your letter guess? \n>>> ")
             user_guessed_word, misses, chosen_word = check_if_guessed_letter_is_wrong_or_right(letter_guess, chosen_word, user_guessed_word)
@@ -181,22 +191,27 @@ def player_options_continuing_game(user_guessed_word, misses, chosen_word):
                 print "Congratulations! You guessed {} correctly!".format(chosen_word)
                 break
             elif len(misses) == 6:
-                print "Uh oh, you had 6 incorrect guesses and you died. Better luck next time! The word was {}".format(chosen_word)
+                print "Uh oh, you had 6 incorrect guesses and you died."+ 
+                "Better luck next time! The word was {}".format(chosen_word)
                 break
         elif guess_letter_or_word == "b":
-            word_guess = raw_input("what is your word guess?(make sure there are no typos or extra spaces) \n>>> ")
-            misses = check_if_guessed_word_is_wrong_or_right(word_guess, user_guessed_word, misses, chosen_word)
+            word_guess = raw_input("what is your word guess?" + 
+                "\n(make sure there are no typos or extra spaces) \n\n\n>>> ")
+            check_if_guessed_word_is_wrong_or_right(word_guess, user_guessed_word, misses, chosen_word)
             if  (user_guessed_word == chosen_word) or (word_guess == chosen_word):
                 print "Congratulations! You guessed {} correctly!".format(chosen_word)
                 break
             elif len(misses) == 6:
-                print "Uh oh, you had 6 incorrect guesses and you died. Better luck next time! The word was {}".format(chosen_word)
+                print "Uh oh, you had 6 incorrect guesses and you died."+
+                " Better luck next time! The word was {}".format(chosen_word)
                 break
+        elif guess_letter_or_word == "c":
+            print "Okay, play again soon!"
+            break
         else:
             print "Sorry, {} is not an option.".format(guess_letter_or_word)
+            continue
         # player_options_continuing_game()
-    if guess_letter_or_word == "c":
-        print "Okay, play again soon!"
 
 
 
@@ -204,8 +219,9 @@ def player_options_continuing_game(user_guessed_word, misses, chosen_word):
 def main():
      # prints menu for the player and asks the player which mode the player/s want to play(i.e. 1 or 2 player mode)
     play_or_not = raw_input("Would you like to play Hangman : yes or no \n >>> ")
-    if play_or_not == "yes":
-        mode_choice = str(raw_input("To play hangman choose a mode: \n a) player versus computer \n b) two player mode \n >>>"))
+    if play_or_not == "yes" or play_or_not == "y":
+        mode_choice = str(raw_input("To play hangman choose a mode:"+
+            "\n a) player versus computer \n b) two player mode \n >>>"))
         if mode_choice == "a":
             chosen_word = get_random_word()
             # chosen_word = raw_input("type word here \n >>>")
@@ -214,13 +230,15 @@ def main():
             # misses = []
             player_options_continuing_game(user_guessed_word, misses, chosen_word)
         elif mode_choice == "b":
-            player_word = raw_input("Pick the player who will provide the word and type the word below. \n(make sure there are no typos or extra spaces) \n >>>")
+            player_word = raw_input("Pick the player who will provide the word and type the word below."
+                +"\n(make sure there are no typos or extra spaces) \n >>>")
+            os.system("clear")
             chosen_word = player_word
             create_spaces_for_word(chosen_word)
             user_guessed_word = "*" * len(chosen_word)
             # misses = []
             player_options_continuing_game(user_guessed_word, misses, chosen_word)
-    elif play_or_not == "no":
+    elif play_or_not == "no" or play_or_not == "n":
         pass
     else:
         print "Sorry, {} is not an option.".format(play_or_not)
