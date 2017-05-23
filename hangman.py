@@ -26,4 +26,9 @@ hangman
 # If player 2 guesses all of the letters or the word correctly; player 2 wins
 # If the player guesses more than 5 letters or words incorrectly; player 1 wins
 
+Pseudocode: player 1 mode (player versus computer)
+Set up menu options (mode 1 or quit)
+After player chooses play mode, refresh the menu to prompt a guess or if the player wants to continue
+Once you choose the mode 1, computer picks a word from the dictionary
+
     

@@ -150,7 +150,23 @@ def check_if_guessed_letter_is_wrong_or_right(user_guess_letter, chosen_word, us
         print hangman_figures[len(misses)]
     return user_guessed_word, misses, chosen_word
 
-def heck_if_guessed_word_is_wrong_or_right(word_guess)
+def check_if_guessed_word_is_wrong_or_right(word_guess, user_guessed_word, misses, chosen_word):
+    """ this function is used to see if the word the user picked is the correct word """
+    if word_guess == chosen_word:
+        user_guessed_word == word_guess
+    else:
+        if word_guess != len(chosen_word):
+            print "Sorry but {} does not have the same number of characters as the spaces above. Try again.".format(word_guess)
+        misses.append(word_guess)
+    print "Sorry, {} was not the correct word.".format(word_guess)
+    print user_guessed_word
+    print misses
+    if len(misses) == 0:
+        print hangman_figures[0]
+    else:
+        print hangman_figures[len(misses)]
+    return user_guessed_word, misses, chosen_word
+
 
 def player_options_continuing_game(user_guessed_word, misses, chosen_word):
     """ this function  asks the player for a letter and also gives the
@@ -169,10 +185,18 @@ def player_options_continuing_game(user_guessed_word, misses, chosen_word):
                 break
         elif guess_letter_or_word == "b":
             word_guess = raw_input("what is your word guess?(make sure there are no typos or extra spaces) \n>>> ")
-            check_if_guessed_word_is_wrong_or_right(word_guess)
+            misses = check_if_guessed_word_is_wrong_or_right(word_guess, user_guessed_word, misses, chosen_word)
+            if  (user_guessed_word == chosen_word) or (word_guess == chosen_word):
+                print "Congratulations! You guessed {} correctly!".format(chosen_word)
+                break
+            elif len(misses) == 6:
+                print "Uh oh, you had 6 incorrect guesses and you died. Better luck next time! The word was {}".format(chosen_word)
+                break
         else:
             print "Sorry, {} is not an option.".format(guess_letter_or_word)
         # player_options_continuing_game()
+    if guess_letter_or_word == "c":
+        print "Okay, play again soon!"
 
 
 
